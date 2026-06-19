@@ -1,0 +1,26 @@
+<div class="dashboard">
+  <header>
+    <h1>🎵 Music Playlist</h1>
+    <button (click)="logout()">Déconnexion</button>
+  </header>
+
+  <main>
+    <h2>Mes playlists</h2>
+    <button (click)="goToCreate()">+ Ajouter une playlist</button>
+    <p>Nombre de playlists : {{ playlists.length }}</p>
+    <p>Nombre : {{ playlists.length }}</p>
+    <pre>{{ playlists | json }}</pre>
+
+    <div *ngIf="playlists.length === 0">
+      Aucune playlist pour le moment.
+    </div>
+
+    <div class="playlist-card" *ngFor="let playlist of playlists">
+      <h3>{{ playlist.name }}</h3>
+      <p>{{ playlist.description }}</p>
+      <span>{{ playlist.genre }}</span>
+
+      <button (click)="deletePlaylist(playlist.id)">Supprimer</button>
+    </div>
+  </main>
+</div>

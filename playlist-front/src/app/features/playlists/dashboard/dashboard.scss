@@ -1,0 +1,27 @@
+.dashboard {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 24px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+button {
+  padding: 10px 14px;
+  cursor: pointer;
+}
+
+.playlist-card {
+  margin-top: 16px;
+  padding: 16px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+}
+
+.playlist-card h3 {
+  margin: 0 0 8px;
+}
