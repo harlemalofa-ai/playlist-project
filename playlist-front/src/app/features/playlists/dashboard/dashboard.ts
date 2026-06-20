@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Playlist } from '../../../core/models/playlist.model';
 import { PlaylistService } from '../../../core/services/playlist.service';
@@ -18,21 +18,21 @@ export class Dashboard implements OnInit {
     private readonly playlistService: PlaylistService,
     private readonly authService: AuthService,
     private readonly router: Router,
+    private readonly changeDetectorRef: ChangeDetectorRef,
   ) {}
 
   ngOnInit(): void {
-    console.log('Dashboard chargé');
     this.loadPlaylists();
   }
 
   loadPlaylists(): void {
     this.playlistService.findAll().subscribe({
       next: (data) => {
-        console.log('Playlists reçues :', data);
-        this.playlists = [...data];
+        this.playlists = data;
+        this.changeDetectorRef.detectChanges();
       },
       error: (error) => {
-        console.error(error);
+        console.error('Erreur chargement playlists', error);
       },
     });
   }
@@ -57,6 +57,4 @@ export class Dashboard implements OnInit {
       next: () => this.loadPlaylists(),
     });
   }
-
-
 }
