@@ -1,6 +1,7 @@
 <div class="dashboard">
   <header>
     <h1>🎵 Music Playlist</h1>
+    <p *ngIf="userEmail">Connecté : {{ userEmail }}</p>
     <button (click)="logout()">Déconnexion</button>
   </header>
 
@@ -18,7 +19,10 @@
       <p>{{ playlist.description || 'Aucune description' }}</p>
       <span>Genre : {{ playlist.genre }}</span>
 
-      <button (click)="deletePlaylist(playlist.id)">Supprimer</button>
+      <div class="actions">
+        <button (click)="goToEdit(playlist.id)">Modifier</button>
+        <button (click)="deletePlaylist(playlist.id)">Supprimer</button>
+      </div>
     </div>
   </main>
 </div>

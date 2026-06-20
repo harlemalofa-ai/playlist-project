@@ -22,6 +22,7 @@ export class Dashboard implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.loadCurrentUser();
     this.loadPlaylists();
   }
 
@@ -55,6 +56,23 @@ export class Dashboard implements OnInit {
 
     this.playlistService.delete(id).subscribe({
       next: () => this.loadPlaylists(),
+    });
+  }
+
+  goToEdit(id: string): void {
+    this.router.navigate(['/playlists/edit', id]);
+  }
+
+  userEmail = '';
+
+  loadCurrentUser(): void {
+    this.authService.me().subscribe({
+      next: (user) => {
+        this.userEmail = user.email;
+      },
+      error: (error) => {
+        console.error('Erreur chargement utilisateur', error);
+      },
     });
   }
 }

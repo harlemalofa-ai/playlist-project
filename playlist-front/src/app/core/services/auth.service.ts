@@ -36,4 +36,8 @@ export class AuthService {
   isLoggedIn(): boolean {
     return this.tokenService.isLoggedIn();
   }
+
+  me(): Observable<{ sub: string; email: string }> {
+    return this.apiService.get<{ sub: string; email: string }>('/auth/me');
+  }
 }

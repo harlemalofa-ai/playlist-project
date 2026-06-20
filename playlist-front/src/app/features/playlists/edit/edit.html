@@ -1,0 +1,18 @@
+<div class="form-container">
+  <h1>Modifier la playlist</h1>
+
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <label>Nom</label>
+    <input type="text" formControlName="name">
+
+    <label>Description</label>
+    <textarea formControlName="description"></textarea>
+
+    <label>Genre</label>
+    <input type="text" formControlName="genre">
+
+    <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+    <button type="submit">Modifier</button>
+  </form>
+</div>
