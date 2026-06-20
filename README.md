@@ -34,7 +34,7 @@ Projet web de gestion de playlists musicales réalisé avec Angular, NestJS et P
 
 ### Gestion des playlists
 - Afficher la liste des playlists
-- Afficher les détails d'une playlist via l'API
+- Afficher les détails d'une playlist
 - Créer une playlist
 - Modifier une playlist
 - Supprimer une playlist
