@@ -40,4 +40,16 @@ export class AuthService {
   me(): Observable<{ sub: string; email: string }> {
     return this.apiService.get<{ sub: string; email: string }>('/auth/me');
   }
+
+  refreshToken(): Observable<AuthResponse> {
+    const refreshToken = this.tokenService.getRefreshToken();
+
+    return this.apiService.post<AuthResponse>('/auth/refresh-token', {
+      refreshToken,
+    }).pipe(
+      tap((response) => {
+        this.tokenService.saveTokens(response.accessToken, response.refreshToken);
+      }),
+    );
+  }
 }
