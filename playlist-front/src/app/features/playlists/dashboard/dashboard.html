@@ -20,6 +20,7 @@
       <span>Genre : {{ playlist.genre }}</span>
 
       <div class="actions">
+        <button (click)="goToDetail(playlist.id)">Détail</button>
         <button (click)="goToEdit(playlist.id)">Modifier</button>
         <button (click)="deletePlaylist(playlist.id)">Supprimer</button>
       </div>

@@ -5,6 +5,7 @@ import { Dashboard } from './features/playlists/dashboard/dashboard';
 import { Create } from './features/playlists/create/create';
 import { Edit } from './features/playlists/edit/edit';
 import { authGuard } from './core/guards/auth-guard';
+import { Detail } from './features/playlists/detail/detail';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -19,6 +20,11 @@ export const routes: Routes = [
   {
     path: 'playlists/create',
     component: Create,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'playlists/detail/:id',
+    component: Detail,
     canActivate: [authGuard],
   },
   {

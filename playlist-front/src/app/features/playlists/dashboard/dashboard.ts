@@ -75,4 +75,8 @@ export class Dashboard implements OnInit {
       },
     });
   }
+
+  goToDetail(id: string): void {
+    this.router.navigate(['/playlists/detail', id]);
+  }
 }

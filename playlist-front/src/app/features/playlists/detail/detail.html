@@ -1,0 +1,24 @@
+<div class="detail-container">
+  <button (click)="goBack()">← Retour</button>
+
+  <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+  <div class="playlist-detail" *ngIf="playlist">
+    <h1>{{ playlist.name }}</h1>
+
+    <p>
+      <strong>Description :</strong>
+      {{ playlist.description || 'Aucune description' }}
+    </p>
+
+    <p>
+      <strong>Genre :</strong>
+      {{ playlist.genre }}
+    </p>
+
+    <p>
+      <strong>ID :</strong>
+      {{ playlist.id }}
+    </p>
+  </div>
+</div>
