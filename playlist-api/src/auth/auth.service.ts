@@ -7,6 +7,16 @@ import { SignUpDto } from './dto/sign-up.dto';
 import { SignInDto } from './dto/sign-in.dto';
 import { RefreshTokenDto } from './dto/refresh-token.dto';
 
+function requireEnv(name: string): string {
+    const value = process.env[name];
+
+    if (!value) {
+        throw new Error(`Missing required environment variable: ${name}`);
+    }
+
+    return value;
+}
+
 @Injectable()
 export class AuthService {
     constructor(
@@ -58,7 +68,7 @@ export class AuthService {
 
     async refreshToken(dto: RefreshTokenDto) {
         const payload = this.jwtService.verify(dto.refreshToken, {
-            secret: process.env.JWT_REFRESH_SECRET,
+            secret: requireEnv('JWT_REFRESH_SECRET'),
         });
 
         const user = await this.usersService.findById(payload.sub);
@@ -88,12 +98,12 @@ export class AuthService {
         };
 
         const accessToken = await this.jwtService.signAsync(payload, {
-            secret: process.env.JWT_SECRET || 'default_access_secret',
+            secret: requireEnv('JWT_SECRET'),
             expiresIn: '15m',
         });
 
         const refreshToken = await this.jwtService.signAsync(payload, {
-            secret: process.env.JWT_REFRESH_SECRET || 'default_refresh_secret',
+            secret: requireEnv('JWT_REFRESH_SECRET'),
             expiresIn: '7d',
         });
 
