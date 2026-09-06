@@ -9,17 +9,19 @@ export class AuthGuard implements CanActivate {
         const request = context.switchToHttp().getRequest();
         const authorization = request.headers.authorization;
 
-        if (!authorization) {
-            throw new UnauthorizedException('Token missing');
+        if (!authorization?.startsWith('Bearer ')) {
+            throw new UnauthorizedException('Token missing or malformed');
         }
 
-        const token = authorization.replace('Bearer ', '');
+        const token = authorization.slice(7);
+        const secret = process.env.JWT_SECRET;
+
+        if (!secret) {
+            throw new Error('Missing required environment variable: JWT_SECRET');
+        }
 
         try {
-            const payload = this.jwtService.verify(token, {
-                secret: process.env.JWT_SECRET || 'default_access_secret',
-            });
-
+            const payload = this.jwtService.verify(token, { secret });
             request.user = payload;
             return true;
         } catch {
