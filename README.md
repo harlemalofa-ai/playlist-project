@@ -4,6 +4,18 @@ Application web de gestion de playlists musicales réalisée dans le cadre d’u
 
 Le projet repose sur une architecture **frontend / backend** avec **Angular**, **NestJS** et **PostgreSQL**. Il permet à un utilisateur de créer un compte, se connecter, obtenir des tokens JWT et gérer des playlists via une API protégée.
 
+## Ce que ce projet démontre
+
+- développement full-stack avec Angular et NestJS ;
+- création et consommation d’une API REST ;
+- authentification avec access token et refresh token JWT ;
+- hashage des mots de passe et refresh tokens avec bcrypt ;
+- persistance des données avec PostgreSQL et TypeORM ;
+- validation des données avec DTO et `class-validator` ;
+- protection des routes avec guards et interceptors ;
+- gestion des secrets via variables d’environnement ;
+- utilisation de Git / GitHub avec un historique de commits progressif.
+
 ## Fonctionnalités principales
 
 ### Authentification
@@ -47,6 +59,18 @@ Le projet repose sur une architecture **frontend / backend** avec **Angular**, *
 
 ## Architecture
 
+```mermaid
+flowchart LR
+    U[Utilisateur] --> A[Angular Frontend]
+    A -->|HTTP / JSON| N[NestJS API]
+    N --> G[Auth Guard / JWT]
+    N --> S[Services]
+    S --> T[TypeORM]
+    T --> P[(PostgreSQL)]
+```
+
+Structure principale :
+
 ```text
 playlist-project/
 ├── playlist-front/   # application Angular
@@ -62,7 +86,7 @@ src/
 └── playlists/
 ```
 
-La partie `playlists` utilise une architecture classique NestJS avec :
+La partie `playlists` suit le flux :
 
 ```text
 Controller -> Service -> Repository TypeORM -> PostgreSQL
@@ -72,13 +96,11 @@ Controller -> Service -> Repository TypeORM -> PostgreSQL
 
 ### Backend
 
-Se placer dans le dossier :
-
 ```bash
 cd playlist-api
 ```
 
-Créer un fichier `.env` à partir de `.env.example` puis renseigner les variables nécessaires :
+Créer un fichier `.env` à partir de `.env.example` puis renseigner :
 
 ```text
 APP_PORT=3000
@@ -104,8 +126,6 @@ npm run start:dev
 
 ### Frontend
 
-Dans un autre terminal :
-
 ```bash
 cd playlist-front
 npm install
@@ -113,8 +133,6 @@ npm start
 ```
 
 ## API
-
-Exemples de routes utilisées :
 
 ```text
 POST   /auth/signup
@@ -128,19 +146,6 @@ POST   /playlist
 PUT    /playlist/:id
 DELETE /playlist/:id
 ```
-
-## Points techniques mis en pratique
-
-- séparation frontend / backend ;
-- création d’une API REST avec NestJS ;
-- persistance relationnelle avec PostgreSQL et TypeORM ;
-- DTO et validation de données ;
-- authentification JWT ;
-- hashage des mots de passe et refresh tokens ;
-- guards et interceptors ;
-- CRUD complet ;
-- gestion de configuration via variables d’environnement ;
-- utilisation de Git / GitHub avec historique de commits progressif.
 
 ## Limites connues et améliorations possibles
 
