@@ -158,6 +158,6 @@ DELETE /playlist/:id
 
 ## Contexte
 
-Projet réalisé par **Harlem Alofa**, étudiant en **Bachelier en Informatique — orientation Développement d’applications**.
+Projet réalisé par **Harlem Kponve Alofa**, étudiant en **Bachelier en Informatique — orientation Développement d’applications**.
 
 Ce dépôt met principalement en évidence des compétences en **développement full-stack, TypeScript, Angular, NestJS, PostgreSQL, API REST et authentification**.
